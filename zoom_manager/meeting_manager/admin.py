@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ZoomUsers, ZoomMeetings, ZoomCredentionals
+
+admin.site.register(ZoomUsers)
+admin.site.register(ZoomMeetings)
+admin.site.register(ZoomCredentionals)
