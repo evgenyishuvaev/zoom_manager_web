@@ -1,0 +1,54 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+.wrapper__title{
+    margin: 20px;
+    text-align: center;
+}
+
+.wrapper__meetings_table{
+    margin: 50px;
+}
+
+.meetings_table {
+    font-size: 30px;
+    border-collapse: collapse;
+    padding: 20px;
+    background-color: ghostwhite;
+    border: 1px black solid;
+}
+
+tr {
+    border: 1px black solid;
+}
+
+td {
+    border: 1px black solid;
+}
+
+th {
+    border: 1px black solid;
+}
+
+
+
+
+button {
+    background-color: lightgreen;
+    border: 0px;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+button:hover{
+    background-color: seagreen;
+}
+
+button:active{
+    background-color: springgreen;
+}

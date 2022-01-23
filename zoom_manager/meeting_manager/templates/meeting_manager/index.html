@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zoom Manager</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'meeting_manager/css/style.css' %}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1 class="wrapper__title">
+            Zoom Manager v0.1
+        </h1>
+        <div class="wrapper__meetings_table">
+            <table class="meetings_table">
+                <tr>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        e.shuvaev@freshauto.ru
+                    </th>
+                </tr>
+                <tr>
+                    <td>08-00</td>
+                    <td>Моя конференция</td>
+                </tr>
+
+                
+            </table>
+            <div class="actions_button">
+                <button id="refreshTabelButton">Обновить</button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'meeting_manager/js/main.js' %}"></script>
+</body>
+</html>
