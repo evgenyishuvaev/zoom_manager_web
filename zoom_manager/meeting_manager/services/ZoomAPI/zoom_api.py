@@ -1,5 +1,6 @@
 import base64
 from typing import Optional, Union, List
+from urllib import request
 import requests
 
 from meeting_manager.models import ZoomCredentionals, ZoomMeetings, ZoomUsers
@@ -46,7 +47,6 @@ def refresh_token() -> Optional[Union[bool, str]]:
     refresh_token_data = ZoomCredentionals.objects.get(name_data="refresh_token")
     access_token_data = ZoomCredentionals.objects.get(name_data="access_token")
     refresh_token = refresh_token_data.data
-    print(refresh_token)
 
     headers_for_refresh = {
         "Authorization": encode_base64_auth_headers(client_id, client_secret),
@@ -67,7 +67,6 @@ def refresh_token() -> Optional[Union[bool, str]]:
         
     try:
         json_resp = response.json()
-        print(json_resp)
         if "reason" in json_resp.keys() and json_resp["reason"] == "Invalid Token!":
             raise InvalidRefreshTokenError()
 
@@ -83,3 +82,74 @@ def refresh_token() -> Optional[Union[bool, str]]:
     refresh_token_data.save()
 
     return "Token was refresh!"
+
+
+def get_users_list():
+
+    access_token = ZoomCredentionals.objects.get(name_data="access_token").data
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    response =  requests.get(
+        "https://api.zoom.us/v2/users", 
+        headers=headers
+        )
+    json_resp =  response.json()
+    users = json_resp['users']
+    user_list = []
+
+    for user in users:
+        user_id, first_name, last_name, user_email = user['id'], user['first_name'], user['last_name'], user['email']
+        user_list.append((user_id, first_name, last_name, user_email))
+        zoom_user = ZoomUsers(user_id, first_name, last_name, user_email)
+        zoom_user.save()
+    
+    return user_list
+
+
+def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
+    
+    access_token = ZoomCredentionals.objects.get(name_data="access_token").data
+    headers = {"Authorization": f"Bearer {access_token}"}
+    meetings_lst = []
+
+    for user_id in zoom_users_id:
+        print(user_id)
+        try:
+            response =  requests.get(
+                f"https://api.zoom.us/v2/users/{user_id}/meetings",
+                headers=headers)
+
+            json_resp : dict = response.json()
+            print(json_resp)
+
+            check_access(json_resp)
+
+            lst_of_dict_meetings = json_resp["meetings"]
+            
+            if len(lst_of_dict_meetings) == 0:
+                continue
+
+
+            for meeting in lst_of_dict_meetings:
+                uuid = meeting["uuid"]
+                host_id = meeting["host_id"]
+                topic = meeting["topic"]
+                meet_type = meeting["type"]
+                start_time = meeting["start_time"]
+                duration = meeting["duration"]
+                join_url = meeting["join_url"]
+                
+                meetings_lst.append((uuid, host_id, topic, start_time, duration, meet_type, join_url))
+
+                zoom_meeting = ZoomMeetings(uuid, host_id, topic, start_time, duration, meet_type, join_url)
+                zoom_meeting.save()
+
+            return meetings_lst 
+
+        except (AccessTokenIsExpired, InvalidApiKeyOrSecret, InvalidTokenError):
+            
+            if not  refresh_token():
+                return "Check your refresh_token for OAuth 2.0"
+            
+            print("Запуск рекурсии")
+            return  get_meetings_from_all_users(zoom_users_id=zoom_users_id)
