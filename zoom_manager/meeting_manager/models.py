@@ -37,7 +37,7 @@ class ZoomMeetings(models.Model):
 
 class ZoomCredentionals(models.Model):
     
-    name_data = models.CharField(max_length=255)
+    name_data = models.CharField(max_length=255, primary_key=True)
     data = models.CharField(max_length=255)
 
     def __str__(self):
