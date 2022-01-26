@@ -89,20 +89,31 @@ def get_users_list():
     access_token = ZoomCredentionals.objects.get(name_data="access_token").data
     headers = {"Authorization": f"Bearer {access_token}"}
 
-    response =  requests.get(
-        "https://api.zoom.us/v2/users", 
-        headers=headers
-        )
-    json_resp =  response.json()
-    users = json_resp['users']
-    user_list = []
+    try:
+        response =  requests.get(
+            "https://api.zoom.us/v2/users", 
+            headers=headers
+            )
+        json_resp =  response.json()
+        check_access(json_resp)
 
-    for user in users:
-        user_id, first_name, last_name, user_email = user['id'], user['first_name'], user['last_name'], user['email']
-        user_list.append((user_id, first_name, last_name, user_email))
-        zoom_user = ZoomUsers(user_id, first_name, last_name, user_email)
-        zoom_user.save()
+        users = json_resp['users']
+        user_list = []
+        for user in users:
+            user_id, first_name, last_name, user_email = user['id'], user['first_name'], user['last_name'], user['email']
+            user_list.append((user_id, first_name, last_name, user_email))
+            zoom_user = ZoomUsers(user_id, first_name, last_name, user_email)
+            zoom_user.save()
     
+    except (AccessTokenIsExpired, InvalidApiKeyOrSecret, InvalidTokenError):
+            
+            if not refresh_token():
+                return "Check your refresh_token for OAuth 2.0"
+            
+            print("Запуск рекурсии")
+            return  get_users_list()
+
+
     return user_list
 
 
@@ -144,7 +155,6 @@ def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
                 zoom_meeting = ZoomMeetings(uuid, host_id, topic, start_time, duration, meet_type, join_url)
                 zoom_meeting.save()
 
-            return meetings_lst 
 
         except (AccessTokenIsExpired, InvalidApiKeyOrSecret, InvalidTokenError):
             
@@ -153,3 +163,5 @@ def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
             
             print("Запуск рекурсии")
             return  get_meetings_from_all_users(zoom_users_id=zoom_users_id)
+    
+    return meetings_lst

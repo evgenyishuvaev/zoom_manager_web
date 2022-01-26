@@ -44,7 +44,8 @@ th {
 
 
 button {
-    background-color: lightgreen;
+    color: white;
+    background-color: #0e71eb;
     border: 0px;
     border-radius: 10px;
     width: 200px;
@@ -52,9 +53,9 @@ button {
 }
 
 button:hover{
-    background-color: seagreen;
+    background-color: #1078f8;
 }
 
 button:active{
-    background-color: springgreen;
+    background-color: #105ebe;
 }
