@@ -3,6 +3,8 @@ from django.http import HttpResponse, JsonResponse
 
 from .services.ZoomAPI.zoom_api import refresh_token, get_users_list, get_meetings_from_all_users
 from .models import ZoomUsers
+
+
 # Create your views here.
 def meetings_page(request):
     return render(request, "meeting_manager/index.html")

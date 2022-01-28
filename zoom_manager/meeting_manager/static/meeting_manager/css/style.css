@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: antiquewhite;
 }
 
 .wrapper__title{
@@ -11,10 +10,14 @@
 }
 
 .wrapper__meetings_table{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
     margin: 50px;
 }
 
 .actions_bar {
+    margin: 20px;
     display: flex;
     justify-content: space-around;
 }
@@ -28,11 +31,22 @@
     border: 1px black solid;
 }
 
+.time_cell{
+    
+    
+    
+}
+
+table{
+    border-collapse: collapse;
+}
+
 tr {
     border: 1px black solid;
 }
 
 td {
+    text-align: center;
     border: 1px black solid;
 }
 
@@ -44,7 +58,8 @@ th {
 
 
 button {
-    background-color: lightgreen;
+    color: white;
+    background-color: #0e71eb ;
     border: 0px;
     border-radius: 10px;
     width: 200px;
@@ -52,9 +67,9 @@ button {
 }
 
 button:hover{
-    background-color: seagreen;
+    background-color: #0c75f5;
 }
 
 button:active{
-    background-color: springgreen;
+    background-color: #0c5cbe;
 }
