@@ -39,7 +39,13 @@ async function getAllMeetings() {
 };
 
 function buildTableMeetings(api_data) {
+    for (let i = 0; i < api_data.lenth; i++){
 
+        let meetingInfoElement = document.createElement("p");
+        meetingInfoElement.textContent = api_data[i].join("<br>");
+        tableWrapper.appendChild(meetingInfoElement)
+        console.log("Building end")
+    };
 };
 
 function refreshSheduledMeetings() {
