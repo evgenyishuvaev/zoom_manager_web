@@ -31,27 +31,22 @@
     border: 1px black solid;
 }
 
-.time_cell{
-    
-    
-    
-}
-
 table{
     border-collapse: collapse;
 }
 
 tr {
-    border: 1px black solid;
+    border: 3px black solid;
 }
 
 td {
+    background-color: grey;
     text-align: center;
-    border: 1px black solid;
+    border: 3px black solid;
 }
 
 th {
-    border: 1px black solid;
+    border: 3px black solid;
 }
 
 
