@@ -1,0 +1,25 @@
+{% extends 'template/base.html'%}
+
+{% block content%}
+    <h1>Login page</h1>
+    <hr>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag}}</td>
+                <td>{{ form.username}}</td>
+            </tr>
+            
+            <tr>
+                <td>{{ form.password.label_tag}}</td>
+                <td>{{ form.password}}</td>
+            </tr>
+        
+            <tr>
+                <td></td>
+                <td><button class="btn btn-success">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

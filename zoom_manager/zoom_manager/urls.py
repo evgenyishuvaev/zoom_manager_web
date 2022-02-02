@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('meeting_manager/', include('meeting_manager.urls')),
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('meeting_manager/', include('meeting_manager.urls'), name='meeting_manager'),
 ]
