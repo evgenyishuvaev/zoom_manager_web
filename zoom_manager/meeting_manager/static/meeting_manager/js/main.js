@@ -11,6 +11,7 @@ let timeRowClass = [
     ".t14", ".t15", ".t16", ".t17", ".t18", ".t19", ".t20"
 ]
 
+
 // refreshButton.addEventListener("click", refreshButton, false);
 document.addEventListener("DOMContentLoaded", addZoomUsersToTable, false);
 getMeetingsButton.addEventListener("click", getAllMeetings, false);
@@ -43,9 +44,16 @@ async function addZoomUsersToTable() {
             for(let i = 0; i < timeRowClass.length; i++){
                 let timeRow = document.querySelector(`${timeRowClass[i]}`)
                 let host_idCell = document.createElement("td")
+                let host_idButton = document.createElement("button")
+                host_idButton.id = `btn:${host_id}${timeRowClass[i]}`
+                host_idButton.classList.add('create_btn') 
+                host_idButton.textContent = "Запланировать конференцию"               
+                host_idButton.addEventListener('click', createMeeting, false)
+
                 host_idCell.id = `cell:${host_id}${timeRowClass[i]}`
-                
                 timeRow.appendChild(host_idCell)
+                
+                host_idCell.appendChild(host_idButton)
             }
         }
     }
@@ -84,19 +92,13 @@ async function getAllMeetings() {
     }
 };
 
-// function buildTableMeetings(api_data) {
-//     for (let i = 0; i < api_data.lenth; i++){
 
-//         let meetingInfoElement = document.createElement("p");
-//         meetingInfoElement.textContent = api_data[i].join("<br>");
-//         tableWrapper.appendChild(meetingInfoElement)
-//         console.log("Building end")
-//     };
-// };
+async function createMeeting (event){
+    let host_id = event.currentTarget.id.split(":")[1].slice(0,-4)
+    let time = event.currentTarget.id.split(":")[1].slice(-4)
+    console.log(host_id, time)
+}
 
-// function refreshSheduledMeetings() {
-    
-// };
 
 // async function refreshToken() {
 //     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/refresh_token");

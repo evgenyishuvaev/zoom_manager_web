@@ -64,17 +64,41 @@
 
 
             <div class="actions_bar"> 
-                <!-- <div class="actions_button">
-                    <button id="refreshTabelButton">Refresh Token</button>
+                <!-- <div>
+                    <button id="refreshTabelButton" class="actions_button">Refresh Token</button>
                 </div> -->
 
-                <div class="actions_button">
-                    <button id="getAllMettingsButton">Get Meetings</button>
+                <div>
+                    <button id="getAllMettingsButton" class="actions_button">Get Meetings</button>
                 </div>
 
-                <!-- <div class="actions_button">
-                    <button id="getUsersButton">Get users from zoom</button>
-                </div> -->
+                <div>
+                    <button id="getUsersButton" class="actions_button">Get users from zoom</button>
+                </div>
+            </div>
+        </div>
+        <!-- Конец table -->
+        <!-- Начало формы создания конференции -->
+        <div class="modals">
+            <div class="overlay">
+                <div class="form_creating_meeting">
+                    <form action="#" method="post">
+                        <div class="account">
+                            <label for="meeting_host_id">Аккаунт</label>
+                            <input type="text" id="meeting_host_id">
+                        </div>
+                        <div class="theme">
+                            <label for="meeting_topic">Тема</label>
+                            <input type="text" id="meeting_topic">
+                        </div>
+                        <div class="when">
+                            <label for="meeting_date">Когда</label>
+                            <input type="date" id="meeting_date">
+                            <input type="time" id="meeting_time">
+                        </div>
+                        <input type="submit" value="Сохранить">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
