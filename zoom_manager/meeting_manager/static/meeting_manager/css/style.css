@@ -35,12 +35,12 @@ table{
     border-collapse: collapse;
 }
 
+
 tr {
     border: 3px black solid;
 }
 
 td {
-    background-color: grey;
     text-align: center;
     border: 3px black solid;
 }
@@ -49,8 +49,13 @@ th {
     border: 3px black solid;
 }
 
+tbody > tr:nth-child(2n){
+    background-color: rgb(180, 180, 180);
+}
 
-
+tbody > tr:hover{
+    background-color: aquamarine;
+}
 
 button {
     color: white;

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from .services.ZoomAPI.zoom_api import refresh_token, get_users_list, get_meetings_from_all_users
@@ -9,6 +9,13 @@ from .models import ZoomUsers
 @login_required
 def meetings_page(request):
     return render(request, "meeting_manager/index.html")
+
+
+def get_users_from_zoom(request):
+    
+    result = { "result" : get_users_list()} 
+    return JsonResponse(result)
+
 
 @login_required
 def send_zoom_users_to_web_ui(request):

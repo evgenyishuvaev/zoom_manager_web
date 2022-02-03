@@ -6,11 +6,23 @@ let wrapperMeetingsTable = document.querySelector(".wrapper__meetings_table");
 let actionsBar = document.querySelector(".actions_bar");
 let columnName = document.querySelector(".column_name")
 
-let timeRowClass = [".t08", ".t09", ".t10", ".t11", ".t12", ".t13", ".t14", ".t15", ".t16", ".t17", ".t18", ".t19", ".t20"]
+let timeRowClass = [
+    ".t08", ".t09", ".t10", ".t11", ".t12", ".t13",
+    ".t14", ".t15", ".t16", ".t17", ".t18", ".t19", ".t20"
+]
 
 // refreshButton.addEventListener("click", refreshButton, false);
 document.addEventListener("DOMContentLoaded", addZoomUsersToTable, false);
 getMeetingsButton.addEventListener("click", getAllMeetings, false);
+getUsersButton.addEventListener("click", getUsersFromZoom, false)
+
+
+async function getUsersFromZoom() {
+    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/users_zoom")
+    let resp_json = await response.json()
+    console.log(resp_json)
+}
+
 
 async function addZoomUsersToTable() {
     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/users");
