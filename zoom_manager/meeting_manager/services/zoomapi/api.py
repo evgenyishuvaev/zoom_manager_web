@@ -165,3 +165,15 @@ def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
             return  get_meetings_from_all_users(zoom_users_id=zoom_users_id)
     
     return meetings_lst 
+
+
+# def create_meeting():
+    
+#     request_body ={
+#         "topic": ...,
+#         "type": ...,
+#         "start_time": ...,
+#         "duration": ...,
+#         "timezone": ...,
+
+#     }

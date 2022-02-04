@@ -123,17 +123,24 @@ tbody > tr:hover{
 
 .form_creating_meeting{
     background-color: #fff;
+    border-radius: 10px;
     width: 400px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    height: 600px;
+    display: grid;
+    /* grid-template-columns: 100%;
+    grid-template-rows: 25% 25% 25% 25%; */
 }
 
 form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 30px;
+}
+
+label{
+    display: block;
+}
+
+.meeting_cancel_creation{
+    display: inline-block;
 }

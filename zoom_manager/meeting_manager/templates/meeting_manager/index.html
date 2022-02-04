@@ -1,13 +1,11 @@
+{% extends '../template/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Zoom Manager</title>
-    <link type="text/css" rel="stylesheet" href="{% static 'meeting_manager/css/style.css' %}">
-</head>
 
-<body>
+{% block link_block %}
+    <link type="text/css" rel="stylesheet" href="{% static 'meeting_manager/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
     <div class="wrapper">
         <h1 class="wrapper__title">Zoom Manager v0.1</h1>
         <div class="wrapper__meetings_table">
@@ -96,12 +94,20 @@
                             <input type="date" id="meeting_date">
                             <input type="time" id="meeting_time">
                         </div>
+                        <div class="duration">
+                            <label for="meeting_duration">Продолжительность</label>
+                            <input type="time" id="meeting_duration">
+                        </div>
+                        <div class="cloud_record">
+                            <label>Автоматически записывать конференцию в облако</label>
+                            <input type="checkbox" name="" id="meeting_cloud_record">
+                        </div>
                         <input type="submit" value="Сохранить">
+                        <input type="button" value="Отмена" id="meeting_cancel_creation">
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <script src="{% static 'meeting_manager/js/main.js' %}"></script>
-</body>
-</html>
+{% endblock%}
