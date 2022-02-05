@@ -19,14 +19,14 @@ getUsersButton.addEventListener("click", getUsersFromZoom, false)
 
 
 async function getUsersFromZoom() {
-    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/users_zoom")
+    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/users_zoom")
     let resp_json = await response.json()
     console.log(resp_json)
 }
 
 
 async function addZoomUsersToTable() {
-    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/users");
+    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/users");
     let resp_json = await response.json();
     console.log(resp_json);
 
@@ -61,7 +61,7 @@ async function addZoomUsersToTable() {
 
 
 async function getAllMeetings() {
-    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/all_meetings");
+    let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/all_meetings");
     let resp_json = await response.json();
     console.log(resp_json)
     
@@ -101,7 +101,7 @@ async function createMeeting (event){
 
 
 // async function refreshToken() {
-//     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/refresh_token");
+//     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/refresh_token");
 //     let resp_json = await response.json();
 //     console.log(resp_json);
 // };

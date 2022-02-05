@@ -1,4 +1,3 @@
-from attr import asdict
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required

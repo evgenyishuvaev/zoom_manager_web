@@ -77,37 +77,6 @@
         </div>
         <!-- Конец table -->
         <!-- Начало формы создания конференции -->
-        <div class="modals">
-            <div class="overlay">
-                <div class="form_creating_meeting">
-                    <form action="#" method="post">
-                        <div class="account">
-                            <label for="meeting_host_id">Аккаунт</label>
-                            <input type="text" id="meeting_host_id">
-                        </div>
-                        <div class="theme">
-                            <label for="meeting_topic">Тема</label>
-                            <input type="text" id="meeting_topic">
-                        </div>
-                        <div class="when">
-                            <label for="meeting_date">Когда</label>
-                            <input type="date" id="meeting_date">
-                            <input type="time" id="meeting_time">
-                        </div>
-                        <div class="duration">
-                            <label for="meeting_duration">Продолжительность</label>
-                            <input type="time" id="meeting_duration">
-                        </div>
-                        <div class="cloud_record">
-                            <label>Автоматически записывать конференцию в облако</label>
-                            <input type="checkbox" name="" id="meeting_cloud_record">
-                        </div>
-                        <input type="submit" value="Сохранить">
-                        <input type="button" value="Отмена" id="meeting_cancel_creation">
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
     <script src="{% static 'meeting_manager/js/main.js' %}"></script>
 {% endblock%}
