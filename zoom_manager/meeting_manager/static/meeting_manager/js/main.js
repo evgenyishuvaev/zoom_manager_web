@@ -2,6 +2,13 @@
 let getUsersButton = document.querySelector("#getUsersButton");
 let getMeetingsButton = document.querySelector("#getAllMettingsButton");
 
+let formCancelButton = document.getElementById('meeting_cancel_creation')
+let formOverlay = document.querySelector(".overlay")
+let csrfTokenInput = document.getElementById("csrftoken")
+let accountInput = document.getElementById('meeting_host_id')
+let whenDateInput = document.getElementById('meeting_date')
+let whenTimeInput = document.getElementById('meeting_time')    
+
 let wrapperMeetingsTable = document.querySelector(".wrapper__meetings_table");
 let actionsBar = document.querySelector(".actions_bar");
 let columnName = document.querySelector(".column_name")
@@ -16,7 +23,7 @@ let timeRowClass = [
 document.addEventListener("DOMContentLoaded", addZoomUsersToTable, false);
 getMeetingsButton.addEventListener("click", getAllMeetings, false);
 getUsersButton.addEventListener("click", getUsersFromZoom, false)
-
+formCancelButton.addEventListener("click", hideCreatingForm, false)
 
 async function getUsersFromZoom() {
     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/users_zoom")
@@ -24,6 +31,9 @@ async function getUsersFromZoom() {
     console.log(resp_json)
 }
 
+async function hideCreatingForm() {
+    formOverlay.classList.remove("overlayShow")
+}
 
 async function addZoomUsersToTable() {
     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/users");
@@ -47,7 +57,8 @@ async function addZoomUsersToTable() {
                 let host_idButton = document.createElement("button")
                 host_idButton.id = `btn:${host_id}${timeRowClass[i]}`
                 host_idButton.classList.add('create_btn') 
-                host_idButton.textContent = "Запланировать конференцию"               
+               
+                host_idButton.textContent = "+"               
                 host_idButton.addEventListener('click', createMeeting, false)
 
                 host_idCell.id = `cell:${host_id}${timeRowClass[i]}`
@@ -86,7 +97,7 @@ async function getAllMeetings() {
 
         
         let tableCell = document.getElementById(`cell:${host_id}${time_for_class}`)
-        tableCell.textContent = `${date}<br>${topic}`
+        tableCell.textContent = `${topic}`
 
         console.log(resp_json.result[i])
     }
@@ -95,8 +106,31 @@ async function getAllMeetings() {
 
 async function createMeeting (event){
     let host_id = event.currentTarget.id.split(":")[1].slice(0,-4)
-    let time = event.currentTarget.id.split(":")[1].slice(-4)
-    console.log(host_id, time)
+    let time = event.currentTarget.id.split(":")[1].slice(-2)
+    let emailZoomUser = document.getElementById(`user:${host_id}`).textContent
+    let csrf = document.cookie.split("=")[1]
+
+    let nowDate = new Date()
+
+    let todayDay = nowDate.getDate()
+    let todayMonth = nowDate.getMonth() + 1
+    let todayFullYear = nowDate.getFullYear()
+
+    if(todayDay.toString().length == 1){
+        todayDay = `0${todayDay}`
+    }
+    if(todayMonth.toString().length == 1){
+        todayMonth = `0${todayMonth}`
+    }
+
+    formOverlay.classList.add("overlayShow")
+
+    csrfTokenInput.setAttribute("value", csrf)
+    accountInput.setAttribute("value", emailZoomUser)
+    whenDateInput.setAttribute("value", `${todayFullYear}-${todayMonth}-${todayDay}`)
+    whenTimeInput.setAttribute("value", `${time}:00`)
+
+    console.log(host_id, time, emailZoomUser, csrf, `${todayFullYear}-${todayMonth}-${todayDay}`)
 }
 
 

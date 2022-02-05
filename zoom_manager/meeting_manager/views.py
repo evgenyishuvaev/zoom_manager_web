@@ -50,11 +50,10 @@ def send_all_zoom_meetings_to_web_ui(request):
 def get_data_for_create_meeting(request: HttpRequest):
     
     if request.method == "POST":
-        form = CreateMeetingForms(request.POST)
+        form = request.POST.dict()
         
-        if form.is_valid():
-            print(form.cleaned_data)
-            return HttpResponseRedirect("/meeting_manager")
+        print(form)
+        return HttpResponseRedirect("/meeting_manager")
     
     else:
         form = CreateMeetingForms()

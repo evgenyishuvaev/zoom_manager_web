@@ -67,17 +67,18 @@ tr>td:first-child {
 } */
 
 tbody > tr:hover{
-    background-color: #0e72ebaf;
+    background-color: #3d95ffaf;
 }
 
 .create_btn{
     /* color: #6bdfa1;
     border: 1px solid #6bdfa1; */
-    color: #0e71eb;
-    font-size: 16px;
+    color: #fff;
+    background-color: #0e71eb;
+    font-size: 20px;
     border: 1px solid #0e71eb;
-    border-radius: 10px;
-    background-color: #fff;
+    border-radius: 50%;
+    /* background-color: #fff; */
 }
 
 .create_btn:hover{
@@ -116,9 +117,13 @@ tbody > tr:hover{
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
+}
+
+.overlayShow{
+    display: flex;
 }
 
 .form_creating_meeting{

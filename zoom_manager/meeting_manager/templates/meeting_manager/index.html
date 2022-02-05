@@ -77,6 +77,38 @@
         </div>
         <!-- Конец table -->
         <!-- Начало формы создания конференции -->
+        <div class="modals">
+            <div class="overlay">
+                <div class="form_creating_meeting">
+                    <form action="/meeting_manager/api/v1/create" method="post">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="" id="csrftoken">
+                        <div class="account">
+                            <label for="meeting_host_id">Аккаунт</label>
+                            <input type="text" name="host_email" id="meeting_host_id">
+                        </div>
+                        <div class="theme">
+                            <label for="meeting_topic">Тема</label>
+                            <input type="text" name="topic" id="meeting_topic">
+                        </div>
+                        <div class="when">
+                            <label for="meeting_date">Когда</label>
+                            <input type="date" name="date" id="meeting_date">
+                            <input type="time" name="time" id="meeting_time">
+                        </div>
+                        <div class="duration">
+                            <label for="meeting_duration">Продолжительность</label>
+                            <input type="time" name="duration" id="meeting_duration" value="01:00">
+                        </div>
+                        <div class="cloud_record">
+                            <label>Автоматически записывать конференцию в облако</label>
+                            <input type="checkbox" name="settings-auto_recording" value="cloud" id="meeting_cloud_record">
+                        </div>
+                        <input type="submit" value="Сохранить">
+                        <input type="button" value="Отмена" id="meeting_cancel_creation">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="{% static 'meeting_manager/js/main.js' %}"></script>
 {% endblock%}

@@ -106,6 +106,8 @@ def get_users_list():
             user_list.append((user_id, first_name, last_name, user_email))
             zoom_user = ZoomUsers(user_id, first_name, last_name, user_email)
             zoom_user.save()
+        
+            return user_list
     except (AccessTokenIsExpired, InvalidApiKeyOrSecret, InvalidTokenError):
         
         if not  refresh_token():
@@ -114,7 +116,7 @@ def get_users_list():
         print("Запуск рекурсии")
         get_users_list()
 
-    return user_list
+
 
 
 def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
