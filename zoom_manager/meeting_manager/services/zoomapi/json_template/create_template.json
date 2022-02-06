@@ -1,0 +1,47 @@
+{
+    "topic": "Конференция",
+    "type": 2,
+    "start_time": "",
+    "duration": 120,
+    "timezone": "Europe/Moscow",
+    "agenda": "",
+    "default_password": true,
+    "settings": {
+        "host_video": false,
+        "participant_video": false,
+        "cn_meeting": false,
+        "in_meeting": false,
+        "join_before_host": true,
+        "jbh_time": 0,
+        "mute_upon_entry": true,
+        "watermark": false,
+        "use_pmi": false,
+        "approval_type": 2,
+        "audio": "voip",
+        "auto_recording": "none",
+        "enforce_login": false,
+        "enforce_login_domains": "",
+        "alternative_hosts": "",
+        "close_registration": false,
+        "show_share_button": false,
+        "allow_multiple_devices": false,
+        "registrants_confirmation_email": true,
+        "waiting_room": false,
+        "request_permission_to_unmute_participants": false,
+        "registrants_email_notification": true,
+        "meeting_authentication": false,
+        "encryption_type": "enhanced_encryption",
+        "approved_or_denied_countries_or_regions": {
+            "enable": false
+        },
+        "breakout_room": {
+            "enable": false
+        },
+        "alternative_hosts_email_notification": true,
+        "device_testing": false,
+        "focus_mode": false,
+        "private_meeting": false,
+        "email_notification": true
+    },
+    "pre_schedule": false
+}

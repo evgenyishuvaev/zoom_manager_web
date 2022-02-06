@@ -1,4 +1,7 @@
 import base64
+import json
+from logging import exception
+
 from typing import Optional, Union, List
 from urllib import request
 import requests
@@ -169,13 +172,47 @@ def get_meetings_from_all_users(zoom_users_id : List[tuple]) -> List[tuple]:
     return meetings_lst 
 
 
-# def create_meeting():
-    
-#     request_body ={
-#         "topic": ...,
-#         "type": ...,
-#         "start_time": ...,
-#         "duration": ...,
-#         "timezone": ...,
+def create_meeting(form : dict):
 
-#     }
+    access_token = ZoomCredentionals.objects.get(name_data="access_token").data
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    with open("meeting_manager/services/zoomapi/json_template/create_template.json", "r") as tmp_request:
+        request_json = json.load(tmp_request)
+    
+    user_id = form['host_email']
+    
+    topic = form["topic"]
+    start_time = f"{'T'.join([form['date'], form['time']])}+03:00"
+    duration = int(form["duration"].split(":")[0]) * 60
+
+    request_json["topic"] = topic
+    request_json["start_time"] = start_time
+    request_json["duration"] = duration
+
+    if form.get("settings-auto_recording"):
+        request_json["settings"]["auto_recording"] = form["settings-auto_recording"]
+
+
+    print(request_json)
+
+    try:
+        response =  requests.post(
+                    f"https://api.zoom.us/v2/users/{user_id}/meetings",
+                    headers=headers,
+                    json=request_json
+                    )
+
+        json_resp : dict = response.json()
+
+        print(json_resp)
+        check_access(json_resp)
+
+        return True 
+
+    except (AccessTokenIsExpired, InvalidApiKeyOrSecret, InvalidTokenError):
+        
+        if not  refresh_token():
+            return "Check your refresh_token for OAuth 2.0"
+        
+        create_meeting(form=form)

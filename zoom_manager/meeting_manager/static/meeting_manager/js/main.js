@@ -40,7 +40,8 @@ async function addZoomUsersToTable() {
     let resp_json = await response.json();
     console.log(resp_json);
 
-    for (host_id in resp_json){ 
+    for (host_id in resp_json){
+
         if (document.getElementById(`user:${host_id}`) == null){
 
             console.log("Я в условии")
@@ -76,6 +77,10 @@ async function getAllMeetings() {
     let resp_json = await response.json();
     console.log(resp_json)
     
+    if (resp_json.result == "Check your refresh_token for OAuth 2.0"){
+        console.log(resp_json.result)
+        return
+    }
 
     for(let i = 0; i < resp_json.result.length; i++){
 
@@ -83,8 +88,7 @@ async function getAllMeetings() {
         let date = new Date(resp_json.result[i][3])
         let time_for_class = `.t${date.getHours()}`
         let topic = resp_json.result[i][2]
-        console.log("Я в первом цикле")
-        console.log(i)
+        console.log(topic, host_id, date, time_for_class)
 
         let nowData = new Date()
         let meetingData = new Date(resp_json.result[i][3])
@@ -128,7 +132,7 @@ async function createMeeting (event){
     csrfTokenInput.setAttribute("value", csrf)
     accountInput.setAttribute("value", emailZoomUser)
     whenDateInput.setAttribute("value", `${todayFullYear}-${todayMonth}-${todayDay}`)
-    whenTimeInput.setAttribute("value", `${time}:00`)
+    whenTimeInput.setAttribute("value", `${time}:00:00`)
 
     console.log(host_id, time, emailZoomUser, csrf, `${todayFullYear}-${todayMonth}-${todayDay}`)
 }
@@ -139,3 +143,4 @@ async function createMeeting (event){
 //     let resp_json = await response.json();
 //     console.log(resp_json);
 // };
+
