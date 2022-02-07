@@ -20,7 +20,7 @@ let timeRowClass = [
 
 
 // refreshButton.addEventListener("click", refreshButton, false);
-document.addEventListener("DOMContentLoaded", addZoomUsersToTable, false);
+document.addEventListener("DOMContentLoaded", buildTable, false);
 getMeetingsButton.addEventListener("click", getAllMeetings, false);
 getUsersButton.addEventListener("click", getUsersFromZoom, false)
 formCancelButton.addEventListener("click", hideCreatingForm, false)
@@ -35,7 +35,7 @@ async function hideCreatingForm() {
     formOverlay.classList.remove("overlayShow")
 }
 
-async function addZoomUsersToTable() {
+async function buildTable() {
     let response = await fetch("http://127.0.0.1:8000/meeting_manager/api/v1/users");
     let resp_json = await response.json();
     console.log(resp_json);
@@ -69,6 +69,8 @@ async function addZoomUsersToTable() {
             }
         }
     }
+
+    getAllMeetings()
 }
 
 
@@ -78,7 +80,7 @@ async function getAllMeetings() {
     console.log(resp_json)
     
     if (resp_json.result == "Check your refresh_token for OAuth 2.0"){
-        console.log(resp_json.result)
+        alert(resp_json.result)
         return
     }
 
