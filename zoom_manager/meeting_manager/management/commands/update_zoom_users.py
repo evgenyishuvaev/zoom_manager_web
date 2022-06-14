@@ -1,5 +1,3 @@
-from codeop import CommandCompiler
-from http.cookiejar import Cookie
 from django.core.management.base import BaseCommand, CommandError
 
 from meeting_manager.services.zoomapi.api import get_users_list

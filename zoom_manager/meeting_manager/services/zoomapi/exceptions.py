@@ -16,7 +16,7 @@ class InvalidApiKeyOrSecret(Exception):
 class InvalidTokenError(Exception):
     """Error that occurs when we request data from ZoomAPI
     with Invalid Token"""
-    
+
     def __init__(self):
         print(f"*ERROR* Invailid token was use!!!")
 
@@ -24,6 +24,16 @@ class InvalidTokenError(Exception):
 class InvalidRefreshTokenError(Exception):
     """Error that occurs when we request data from ZoomAPI
     with Invalid Refresh Token"""
-    
+
     def __init__(self):
-        print(f"*ERROR* Invailid refresh_token was use!!!\n*INFO*Check your refresh_token for OAuth 2.0")
+        print(
+            f"*ERROR* Invailid refresh_token was use!!!\n*INFO*Check your refresh_token for OAuth 2.0"
+        )
+
+
+class UserDoesNotExist(Exception):
+    """Error that occurs when we request data from ZoomAPI
+    with not exist user"""
+
+    def __init__(self, api_msg):
+        print(f"*ERROR* {api_msg}")

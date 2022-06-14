@@ -1,11 +1,10 @@
-from venv import create
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from .services.zoomapi.api import get_users_list, get_meetings_from_all_users, create_meeting
 from .models import ZoomUsers
-from .forms import CreateMeetingForms
+
 
 @login_required
 def meetings_page(request):
@@ -51,7 +50,7 @@ def send_all_zoom_meetings_to_web_ui(request):
 
 
 @login_required
-def get_data_for_create_meeting(request: HttpRequest):
+def create_zoom_meeting(request: HttpRequest):
     
     if request.method == "POST":
         form = request.POST.dict()

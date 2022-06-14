@@ -1,5 +1,3 @@
-from cProfile import label
-from re import L
 from django import forms
 
 
